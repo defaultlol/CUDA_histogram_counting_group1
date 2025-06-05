@@ -3,7 +3,7 @@
 - Abdul Raafi M. Bandrang
 - Dennis Paulo S. Delgado
 
-**CUDA concept video**: [link](https://www.youtube.com/)
+**CUDA concept video**: [link](https://youtu.be/wEXMjWJNbd4)
 ## Execution times 
 C Execution             |  CUDA Execution
 :-------------------------:|:-------------------------:
@@ -33,4 +33,8 @@ Correctness Check             |  CUDA Execution
 9|2.656205 |1.628516|19|2.375831 |1.642696|29|2.197803 |1.712766|
 10|2.252391 |1.702617|20|2.429471 |1.654965|30|2.692892 |1.638753|
 Average|2.295196 |1.682282|
+
+Based on the analysis of the runtimes of both the C program and the CUDA program, we identify that there is performance gain of 1.36x for CUDA program(inclusive of the overhead memory allocation and data transfer). This performance gain is most likely due to the C program running sequentially whilst the CUDA program utilizes 256 threads that to are able to run in parallel. 
+
 ## Problems encountered
+We struggled with getting the threads to update the bins properly as we haven't implemented the actual atomicadd operation.  The aha moment is learning that atomic operations are a way for the threads to acquire the locks to the memory and signal that the address they had a lock to was going to be updated by them and then passed to the next thread.
